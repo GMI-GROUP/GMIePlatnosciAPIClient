@@ -39,6 +39,6 @@ class Mapping
         'idealSale' => self::idealSale,
         'idealBankCodes' => self::idealBankCodes,
         'bankTransferSale' => self::bankTransferSale,
-        'paypalSale' => self::paypalSale,
+        'paypalSale' => self::paypalSale
     ];
 }
