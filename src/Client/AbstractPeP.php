@@ -14,16 +14,6 @@ abstract class AbstractPeP
     public const API_URL = 'https://direct.paylane.com/rest/';
 
     /**
-     * @var string
-     */
-    protected $apiLogin = null;
-
-    /**
-     * @var string
-     */
-    protected $apiPassword = null;
-
-    /**
      * @var boolean
      */
     protected $ssl_verify = true;
@@ -33,11 +23,9 @@ abstract class AbstractPeP
      */
     protected $guzzle;
 
-    public function __construct(ClientInterface $guzzle, string $apiLogin, string $apiPassword)
+    public function __construct(ClientInterface $guzzle)
     {
         $this->guzzle = $guzzle;
-        $this->apiLogin = $apiLogin;
-        $this->apiPassword = $apiPassword;
     }
 
     private function client(): ClientInterface
@@ -60,7 +48,8 @@ abstract class AbstractPeP
 
         $response = $this->client()->request(
             $requestMethod,
-            $pepMethod
+            $pepMethod,
+            ['json'    => $data]
         );
 
         return new PePResponse($response->getStatusCode(), json_decode($response->getBody(), true));
